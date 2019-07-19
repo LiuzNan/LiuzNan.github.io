@@ -88,123 +88,14 @@
       
 
       
-        <a id="more"></a>
-
-<h2 id="不改变原数组的方法："><a href="#不改变原数组的方法：" class="headerlink" title="不改变原数组的方法："></a>不改变原数组的方法：</h2><p>1.<code>indexOf()</code> 和<code>lastIndexOf()</code></p>
-<p>1.1 <code>indexOf()</code> : 返回元素在数组的索引，从<code>0</code>开始。若数组不存在该元素，则返回<code>-1</code>。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>, <span class="number">2</span>];</span><br><span class="line">arr.indexOf(<span class="number">1</span>); <span class="comment">// 0</span></span><br><span class="line">arr.indexOf(<span class="number">10</span>); <span class="comment">// -1</span></span><br></pre></td></tr></table></figure>
-
-<p>1.2 <code>lastIndexOf()</code>:<br> 返回元素在数组中最后一次出现的索引，如果没有出现则返回-1.</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">2</span>];</span><br><span class="line">arr.lastIndexOf(<span class="number">2</span>); <span class="comment">// 4</span></span><br></pre></td></tr></table></figure>
-
-<p>2.<code>slice()</code>: 与<code>字符串</code>的<code>substring()</code>方法一样，截取数组的一部分，返回一个新的数组。</p>
-<p>2.1 通常，接受2个参数作为一个左闭右开区间，即包括开始索引位置的元素，但不包括结束索引位置的元素。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>];</span><br><span class="line">arr.slice(<span class="number">0</span>,<span class="number">2</span>)    <span class="comment">// [1, 2] 只返回索引0,1位置的元素</span></span><br></pre></td></tr></table></figure>
-
-<p>2.2 可以省略第二个参数，即截取到原数组的最后一个元素。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arr.slice(<span class="number">2</span>,);    <span class="comment">// [3, 4, 5, 6]</span></span><br></pre></td></tr></table></figure>
-
-<p>2.3 如果没有传参数，则返回一个从头到尾截取所有元素的新数组。可以用来复制一个数组。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> copyArr = arr.slice();</span><br><span class="line">copyArr;   <span class="comment">// [1, 2, 3, 4, 5, 6]</span></span><br></pre></td></tr></table></figure>
-
-<p>3.<code>concat()</code>: 合并数组。把当前的数组和另一个数组连接起来，并返回一个新的数组。</p>
-<p>3.1 <code>concat()</code>方法的参数可以有多个，也可以任意任意类型，<code>数值</code>、<code>字符串</code>、<code>布尔值</code>、<code>数组</code>、<code>对象</code> 都可以，参数会被被添加到新的数组中。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr1 =  [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>];</span><br><span class="line"><span class="keyword">var</span> arr2 = [<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>];</span><br><span class="line"><span class="keyword">var</span> arr3 = arr1.concat(arr2);</span><br><span class="line">arr3;   <span class="comment">// [1, 2, 3, 4, 5, 6, "a", "b", "c"]</span></span><br></pre></td></tr></table></figure>
-
-<p>3.2 注意，如果参数是<code>数组</code>, 会被拉平一次，即数组会被拆开来，加入到新的数组中。具体看示例：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr1 = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line"><span class="keyword">var</span> arr2 = arr1.concat(<span class="number">66</span>,<span class="string">'abc'</span>,<span class="literal">true</span>,[<span class="number">10</span>,<span class="number">20</span>],[<span class="number">30</span>,[<span class="number">31</span>,<span class="number">32</span>]],&#123;<span class="attr">x</span>:<span class="number">100</span>&#125;);</span><br><span class="line">arr2;  <span class="comment">// [1, 2, 3, 66, "abc", true, 10, 20, 30, [31,32], &#123;x:100&#125;]</span></span><br></pre></td></tr></table></figure>
-
-<p>4.<code>join()</code>: 转成字符串。它会把当前Array的每个元素都用指定的字符串连接起来，然后返回连接后的字符串。</p>
-<p>4.1 参数是用来指定连接的字符串。见示例代码：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line">arr.join(<span class="string">'*'</span>)   <span class="comment">// "1*2*3"</span></span><br></pre></td></tr></table></figure>
-
-<p>4.2 如果没有指定参数，默认是用<code>,</code>连接。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line">arr.join()   <span class="comment">// "1,2,3"</span></span><br></pre></td></tr></table></figure>
-
-<p>5.<code>toString()</code>: 返回数组的字符串形式</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line">arr.toString() <span class="comment">// "1,2,3"</span></span><br></pre></td></tr></table></figure>
-
-<p>6.<code>valueOf()</code>:返回数组本身</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line">arr.valueOf() <span class="comment">// [1, 2, 3]</span></span><br></pre></td></tr></table></figure>
-
-<p>7.<code>map()</code>:</p>
-<p>7.1 对数组的所有成员<code>依次调用一个函数</code>，返回值是一个新数组。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line">arr.map(<span class="function"><span class="keyword">function</span>(<span class="params">elem</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> elem*<span class="number">2</span>;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// [2, 4, 6, 8]</span></span><br><span class="line">arr; <span class="comment">// [1, 2, 3]</span></span><br></pre></td></tr></table></figure>
-
-<p>7.2 <code>map</code>方法接受一个函数作为参数,该函数调用时，map方法会将其传入3个参数，分别是当前成员、当前位置和数组本身(后2个参数可选)。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">javascriptarr.map(<span class="function"><span class="keyword">function</span>(<span class="params">elem, index, arr</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> elem * index;</span><br><span class="line">&#125;); </span><br><span class="line"><span class="comment">// [0, 2, 6]</span></span><br></pre></td></tr></table></figure>
-
-<p>7.3 <code>map</code>方法还可以接受第2个参数，表示回调函数执行时<code>this</code>所指向的对象。</p>
-<p>8.<code>forEach()</code>: 与map方法很相似，也是遍历数组的所有成员，执行某种操作。<strong>注意</strong>：<code>forEach</code>方法一般没有返回值</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">log</span>(<span class="params">element, index, array</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'['</span> + index + <span class="string">'] = '</span> + element);</span><br><span class="line">&#125;</span><br><span class="line">arr.forEach(log);</span><br><span class="line"><span class="comment">// [0] = 1</span></span><br><span class="line"><span class="comment">// [1] = 2</span></span><br><span class="line"><span class="comment">// [2] = 3</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>注意</strong>: <code>forEach</code>方法无法中断执行，总是会将所有成员遍历完。如果希望符合某种条件时，就中断遍历，要使用<code>for循环</code>。</p>
-<p>9.<code>filter()</code>:</p>
-<p>9.1 筛选数组的元素，返回值是符合筛选条件元素组成的一个新数组。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>];</span><br><span class="line">arr.filter(<span class="function"><span class="keyword">function</span> (<span class="params">elem</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> (elem &gt; <span class="number">3</span>);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// [4, 5]</span></span><br></pre></td></tr></table></figure>
-
-<p>9.2 <code>filter</code>方法接受一个函数作为参数,该函数调用时，<code>fitler</code>方法会将其传入3个参数，分别是当前成员、当前位置和数组本身(后2个参数可选)。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>];</span><br><span class="line">arr.filter(<span class="function"><span class="keyword">function</span> (<span class="params">elem, index, arr</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> index % <span class="number">2</span> === <span class="number">1</span>;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// [2, 4]</span></span><br></pre></td></tr></table></figure>
-
-<p>9.3 <code>filter</code>方法还可以接受第2个参数，指定测试函数所在的<code>上下文对象</code>（即<code>this对象</code>）。</p>
-<p>10.<code>some()</code>和<code>every()</code>: 类似“断言”（assert），用来判断数组成员是否符合某种条件。</p>
-<p>10.1 接受一个函数作为参数，所有数组成员依次执行该函数，返回一个<code>布尔值</code>。该函数接受三个参数，依次是当前位置的成员、当前位置的序号和整个数组。</p>
-<p>10.2 <code>some</code>方法是只要有一个数组成员的返回值是true，则整个some方法的返回值就是true，否则false。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>];</span><br><span class="line">arr.some(<span class="function"><span class="keyword">function</span> (<span class="params">elem, index, arr</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> elem &gt;= <span class="number">3</span>;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// true</span></span><br></pre></td></tr></table></figure>
-
-<p>10.3 <code>every</code>方法则是所有数组成员的返回值都是true，才返回true，否则false。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>];</span><br><span class="line">arr.every(<span class="function"><span class="keyword">function</span> (<span class="params">elem, index, arr</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> elem &gt;= <span class="number">3</span>;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// false</span></span><br></pre></td></tr></table></figure>
-
-<p>10.4 注意，对于<code>空数组</code>，<code>some</code>方法返回false，<code>every</code>方法返回true</p>
-<p>10.5 <code>some</code>和<code>every</code>方法还可以接受第2个参数，用来绑定函数中的<code>this关键字</code>。</p>
-<p>11.<code>reduce()</code>和<code>reduceRight()</code>: 依次处理数组的每个成员，最终累计为一个值。</p>
-<p>11.1<code>reduce</code>是<code>从左到右</code>处理（从第一个成员到最后一个成员）</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">arr.reduce(<span class="function"><span class="keyword">function</span>(<span class="params">x, y</span>)</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(x, y)</span><br><span class="line">  <span class="keyword">return</span> x + y;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// 1 2</span></span><br><span class="line"><span class="comment">// 3 3</span></span><br><span class="line"><span class="comment">// 6</span></span><br></pre></td></tr></table></figure>
-
-<p>11.2<code>reduceRight</code>则是<code>从右到左</code>处理（从最后一个成员到第一个成员）</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">arr.reduceRight(<span class="function"><span class="keyword">function</span>(<span class="params">x, y</span>)</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(x, y)</span><br><span class="line">  <span class="keyword">return</span> x + y;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// 3 2</span></span><br><span class="line"><span class="comment">// 5 1</span></span><br><span class="line"><span class="comment">// 6</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="改变原数组的方法："><a href="#改变原数组的方法：" class="headerlink" title="改变原数组的方法："></a>改变原数组的方法：</h2><p>1.<code>push()</code>: 向数组的末尾添加若干元素。返回值是改变后的数组长度。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>, <span class="number">2</span>];</span><br><span class="line">arr.push(<span class="number">3</span>) ;<span class="comment">// 3</span></span><br><span class="line">arr; <span class="comment">// [1, 2, 3]</span></span><br><span class="line">arr.push(<span class="string">'b'</span>,<span class="string">'c'</span>); <span class="comment">//5</span></span><br><span class="line">arr; <span class="comment">// [1, 2, 3, "b", "c"]</span></span><br><span class="line">arr.push([<span class="number">10</span>,<span class="number">20</span>]); <span class="comment">//6</span></span><br><span class="line">arr; <span class="comment">// [1, 2, 3, "b", "c", [10,20]]</span></span><br></pre></td></tr></table></figure>
-
-<p>2.<code>pop()</code>: 删除数组最后一个元素。返回值是删除的元素。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr =[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="string">"b"</span>, <span class="string">"c"</span>, [<span class="number">10</span>,<span class="number">20</span>]];</span><br><span class="line">arr.pop(); <span class="comment">// [10, 20]</span></span><br><span class="line">arr;  <span class="comment">// [1, 2, 3, "b", "c"]</span></span><br></pre></td></tr></table></figure>
-
-<p>3.<code>unshift()</code>: 向数组头部添加若干元素。返回值是改变后的数组长度。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>, <span class="number">2</span>];</span><br><span class="line">arr.unshift(<span class="number">3</span>,<span class="number">4</span> );  <span class="comment">// 4</span></span><br><span class="line">arr;  <span class="comment">// [3, 4, 1, 2]</span></span><br></pre></td></tr></table></figure>
-
-<p>4.<code>shift()</code>: 删除数组最后一个元素。返回值是删除的元素。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="number">1</span>, <span class="number">2</span>];</span><br><span class="line">arr.shift(); <span class="comment">// 'a'</span></span><br><span class="line">arr;  <span class="comment">// ['b', 1, 2]</span></span><br></pre></td></tr></table></figure>
-
-<p>5.<code>sort()</code>: 数组排序。</p>
-<p>5.1 <strong>注意</strong>：默认是将所有元素转换成<code>字符串</code>，再按<code>字符串Unicode码点</code>排序。返回值是新的数组。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">12</span>, <span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'ab'</span>, <span class="string">'A'</span>, <span class="string">'B'</span>]</span><br><span class="line">arr.sort();  <span class="comment">// [1, 12, 2, "A", "B", "a", "ab", "b"] 注意：12排在了2的前面</span></span><br></pre></td></tr></table></figure>
-
-<p>5.2 如果元素都是<code>数字</code>，要按<code>从小到大</code>排序，可以传入一个回调函数作为参数。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">12</span>, <span class="number">100</span>]</span><br><span class="line"></span><br><span class="line">arr.sort(<span class="function"><span class="keyword">function</span>(<span class="params">a,b</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a-b;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// [1, 2, 12, 100]</span></span><br></pre></td></tr></table></figure>
-
-<p>5.3 如果想要<code>从大到小</code>排序：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">arr.sort(<span class="function"><span class="keyword">function</span>(<span class="params">a,b</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> b-a;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// [100, 12, 2, 1]</span></span><br></pre></td></tr></table></figure>
-
-<p>6.<code>reverse()</code>: 颠倒数组中元素的位置</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">12</span>, <span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'ab'</span>, <span class="string">'A'</span>, <span class="string">'B'</span>];</span><br><span class="line">arr.reverse();</span><br><span class="line"><span class="comment">// ["B", "A", "ab", "b", "a", 12, 2, 1]</span></span><br></pre></td></tr></table></figure>
-
-<p>7.<code>splice()</code>: 修改数组元素（新增、删减、替换）。从<code>指定的索引</code>开始删除<code>若干个</code>元素，然后再从该位置添加<code>若干个元素</code>。返回值是删除的元素组成的数组。参数1是删除元素的起始索引，参数2是删除的元素个数，之后的参数为待添加的元素。</p>
-<p>7.1 只删除,不添加。可以传入2个参数：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="string">'Alibaba'</span>, <span class="string">'Tencent'</span>, <span class="string">'Baidu'</span>, <span class="string">'XiaoMi'</span>, <span class="string">'360'</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 从索引2开始删除3个元素</span></span><br><span class="line">arr.splice(<span class="number">2</span>, <span class="number">3</span>); <span class="comment">// 返回删除的元素 ['Baidu', 'XiaoMi', '360']</span></span><br><span class="line">arr; <span class="comment">// ['Alibaba', 'Tencent']</span></span><br></pre></td></tr></table></figure>
-
-<p>7.2 只添加,不删除。第2个参数设为<code>0</code>，即不删除元素。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">arr.splice(<span class="number">2</span>, <span class="number">0</span>, <span class="string">'Toutiao'</span>, <span class="string">'Meituan'</span>, <span class="string">'Didi'</span>); <span class="comment">// 返回[],因为没有删除任何元素</span></span><br><span class="line">arr; <span class="comment">// ["Alibaba", "Tencent", "Toutiao", "Meituan", "Didi"]</span></span><br></pre></td></tr></table></figure>
-
-<p>7.3 先删除若干元素，然后在删除的位置上在添加若干个元素。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span>  arr =[<span class="string">"Alibaba"</span>, <span class="string">"Tencent"</span>, <span class="string">"Toutiao"</span>, <span class="string">"Meituan"</span>, <span class="string">"Didi"</span>]</span><br><span class="line">arr.splice(<span class="number">2</span>,<span class="number">2</span>,<span class="string">'Apple'</span>,<span class="string">'Google'</span>);  <span class="comment">// ["Toutiao", "Meituan"]</span></span><br><span class="line">arr; <span class="comment">// ["Alibaba", "Tencent", "Apple", "Google", "Didi"]</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="Array-isArray"><a href="#Array-isArray" class="headerlink" title="Array.isArray()"></a><code>Array.isArray()</code></h2><p>用来判断一个值是否为数组, 如果参数为数组，返回true，否则，返回false.</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>,<span class="number">2</span>]</span><br><span class="line"><span class="built_in">Array</span>.isArray(arr);  <span class="comment">// true;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">Array</span>.isArray(<span class="string">'a'</span>); <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+        <p>目的很简单，主要回顾下javascript里面Array常用的一些属性以及方法，虽然经常使用，但其实一些细节没有注意到，总是等到用到的时候再去查有点浪费时间，因此总结了下加深印象</p>
+        
+          <a class="article-more-link" href="/2019/07/19/JavaScript中数组对象常用方法/">阅读全文</a>
+        
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://liuzhinan.com/2019/07/19/JavaScript中数组对象常用方法/" data-id="cjy9ufcv100051ou9lx1ouj1s"
+      <a data-url="http://liuzhinan.com/2019/07/19/JavaScript中数组对象常用方法/" data-id="cjy9un5d10005fcu92eni271s"
          class="article-share-link">分享</a>
       
     </footer>
@@ -258,7 +149,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://liuzhinan.com/2019/07/18/JavaScript中字符串对象常用方法/" data-id="cjy9ufcuf00021ou9rcbk782z"
+      <a data-url="http://liuzhinan.com/2019/07/18/JavaScript中字符串对象常用方法/" data-id="cjy9un5c50000fcu9zy7lpm9y"
          class="article-share-link">分享</a>
       
     </footer>
@@ -312,7 +203,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://liuzhinan.com/2019/07/15/var、let和const的区别/" data-id="cjy9ufcuj00041ou9hol12rj9"
+      <a data-url="http://liuzhinan.com/2019/07/15/var、let和const的区别/" data-id="cjy9un5ce0002fcu9h229oeye"
          class="article-share-link">分享</a>
       
     </footer>
@@ -366,7 +257,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://liuzhinan.com/2019/07/11/cookies，sessionStorage 和 localStorage 的区别/" data-id="cjy9ufcu700001ou9cl4odk8o"
+      <a data-url="http://liuzhinan.com/2019/07/11/cookies，sessionStorage 和 localStorage 的区别/" data-id="cjy9un5ci0004fcu9m0pu7t4u"
          class="article-share-link">分享</a>
       
     </footer>
